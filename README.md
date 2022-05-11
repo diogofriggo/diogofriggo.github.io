@@ -1,3 +1,5 @@
+> Software development insights
+
 # How to initialize a vector filled with a constant
 
 The `vec!` macro is your friend here. This is as simple as:
