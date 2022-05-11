@@ -156,8 +156,35 @@ fn from_elem<A: Allocator>(elem: i8, n: usize, alloc: A) -> Vec<i8, A> {
 }
 ```
 
-Finally, there it is. If `elem` (we named it `constant`) is the constant `0`, rust takes a performant shortcut: initializes and returns `Vec` with capacity `n`
-If `elem` is anything else Rust resorts to an unsafe block to be able to write bytes directly. Sets `vec`'s `len` and returns it
+Finally, there it is. If `elem` (we named it `constant`) is the constant `0`, rust takes a performant shortcut: initializes and returns `Vec` with capacity `n` filled with zeros
+If `elem` is anything else Rust resorts to an unsafe block to be able to write bytes directly with our provided `constant`, then sets `vec`'s `len` and returns it
 This is foundational code used very frequently by any code base, so it was to be expected that Rust would not use our loop approach. It must be fast!
 Rust had to resort to pointers and the Dark arts of unsafe code to achieve that performance gain.
 For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
+
+Here's the full code we built:
+
+```rust
+macro_rules! my_vec {
+    ( $constant:expr; $n:expr ) => {
+        {
+            let mut temp_vec = Vec::with_capacity($n);
+            (0..$n).for_each(|_| temp_vec.push($constant));
+            temp_vec
+        }
+    };
+}
+
+fn main() {
+    let vec = vec![1usize; 5];
+    println!("{:?}", vec); // [1, 1, 1, 1, 1]
+
+    let vec = (0..5).map(|_| 1).collect::<Vec<usize>>();
+    println!("{:?}", vec); // [1, 1, 1, 1, 1]
+
+    let vec: Vec<usize> = my_vec![1; 5];
+    println!("{:?}", vec); // [1, 1, 1, 1, 1]
+}
+```
+
+Macros are not an easy topic in Rust, so I hope this has been clear enough to be useful and encourage you to write your own macros!
