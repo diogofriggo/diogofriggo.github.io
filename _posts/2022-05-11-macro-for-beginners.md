@@ -9,23 +9,23 @@ How to initialize a vector filled with a constant
 
 We're looking for a concise way to get a vector of `n` elements, all initialized with the same specified `constant`
 
-```rust
+{% highlight rust %}
 let vec: Vec<usize> = vec![1, 1, 1, 1, 1, ..., n];
-```
+{% endhighlight %}
 
 The `vec!` macro is our friend here. This is as simple as:
 
-```rust
+{% highlight rust %}
 let vec = vec![1usize; 5];
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+{% endhighlight %}
 
 Before learning this trick I would do some unnecessary heavy lifting like
 
-```rust
+{% highlight rust %}
 let vec = (0..5).map(|_| 1).collect::<Vec<usize>>();
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+{% endhighlight %}
 
 But how does Rust do it? Let us try to reproduce it
 
@@ -33,25 +33,25 @@ Macro syntax is cryptic amd confusing so let's approach it step by step
 
 The body of an empty macro looks like this
 
-```rust
+{% highlight rust %}
 macro_rules! our_vec {
     (  ) => {
 
     };
 }
-```
+{% endhighlight %}
 
 That's an empty `match` arm with an empty pattern.
 
 Let's add a pattern
 
-```rust
+{% highlight rust %}
 macro_rules! our_vec {
     ( $constant:expr; $n:expr ) => {
 
     };
 }
-```
+{% endhighlight %}
 
 We now match on a pattern of two expressions separated by a semicolon.
 
@@ -59,7 +59,7 @@ We name them as `constant` and `n`
 
 Let's now create a `Vec` with a capacity for `n` items
 
-```rust
+{% highlight rust %}
 macro_rules! our_vec {
     ( $constant:expr; $n:expr ) => {
         { // expression block begins here
@@ -68,7 +68,7 @@ macro_rules! our_vec {
         } // expression block ends here
     };
 }
-```
+{% endhighlight %}
 
 Notice how we used the captured `$n` variable.
 
@@ -79,7 +79,7 @@ this means we are returning `temp_vec`
 
 This vector however does not hold any element yet. Let's add one
 
-```rust
+{% highlight rust %}
 macro_rules! our_vec {
     ( $constant:expr; $n:expr ) => {
         {
@@ -89,18 +89,18 @@ macro_rules! our_vec {
         }
     };
 }
-```
+{% endhighlight %}
 
 At this point let's check what our macro gives us
 
-```rust
+{% highlight rust %}
 let vec = our_vec![1; 5];
 println!("{:?}", vec); // [1]
-```
+{% endhighlight %}
 
 Neat! We're getting a `Vec` with one element in it. Let's turn that into `n` elements
 
-```rust
+{% highlight rust %}
 macro_rules! our_vec {
     ( $constant:expr; $n:expr ) => {
         {
@@ -110,27 +110,27 @@ macro_rules! our_vec {
         }
     };
 }
-```
+{% endhighlight %}
 
-```rust
+{% highlight rust %}
 let vec = our_vec![1; 5];
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+{% endhighlight %}
 
 Awesome, it works! Our macro converted the above code into this
 
-```rust
+{% highlight rust %}
 let vec = {
     let mut temp_vec = Vec::with_capacity(5);
     (0..5).for_each(|_| temp_vec.push(1));
     temp_vec
 };
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+{% endhighlight %}
 
 Rust is open-source so let's [peek at how they do it](https://doc.rust-lang.org/src/alloc/macros.rs.html#42-52) and compare with our approach
 
-```rust
+{% highlight rust %}
 macro_rules! vec {
     () => (
         $crate::__rust_force_expr!($crate::vec::Vec::new())
@@ -142,7 +142,7 @@ macro_rules! vec {
         $crate::__rust_force_expr!(<[_]>::into_vec(box [$($x),+]))
     );
 }
-```
+{% endhighlight %}
 
 We can see that they've got more match arms for the other uses of the `vec!` macro, we're focusing only on the second branch.
 
@@ -150,15 +150,15 @@ We can safely ignore the `__rust_force_expr` macro since it only serves the [pur
 
 The core behaviour is within the `vec::from_elem` function
 
-```rust
+{% highlight rust %}
 pub fn from_elem_in<T: Clone, A: Allocator>(elem: T, n: usize, alloc: A) -> Vec<T, A> {
     <T as SpecFromElem>::from_elem(elem, n, alloc)
 }
-```
+{% endhighlight %}
 
 Hm, the call is being delegated to `SpecFromElem::from_elem`, what does that do?
 
-```rust
+{% highlight rust %}
 fn from_elem<A: Allocator>(elem: i8, n: usize, alloc: A) -> Vec<i8, A> {
     if elem == 0 {
         return Vec { buf: RawVec::with_capacity_zeroed_in(n, alloc), len: n };
@@ -170,7 +170,7 @@ fn from_elem<A: Allocator>(elem: i8, n: usize, alloc: A) -> Vec<i8, A> {
         v
     }
 }
-```
+{% endhighlight %}
 
 Finally, there it is.
 
@@ -186,14 +186,14 @@ For the purposes of this post you can regard `alloc` as an internal implementati
 
     Bonus tip: just like Rust's `vec!` our `our_vec!` macro can be nested, to produce Vec of Vecs!
 
-```rust
+{% highlight rust %}
 let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
 println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
-```
+{% endhighlight %}
 
 Here's the full code we built for you to try
 
-```rust
+{% highlight rust %}
 macro_rules! our_vec {
     ( $constant:expr; $n:expr ) => {
         {
@@ -217,7 +217,7 @@ fn main() {
     let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
     println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 }
-```
+{% endhighlight %}
 
 Macros are not an easy topic in Rust, they can feel quite alien until you get the hang of it,
 so I hope this has been clear enough to be useful and has encouraged you to write your own macros!
