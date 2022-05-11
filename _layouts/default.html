@@ -33,25 +33,13 @@
           </nav>
         </header>
 
-        <div class="grid" id="searchBar">
-
-          <div>
-            <div id="archives">
-              browse by <a title="The complete archive of {{ site.name }}'s Blog by category"
-                          href="{{ site.url }}{{ site.baseurl}}/postsbycategory">category</a> or
-                        <a title="The complete archive of {{ site.name }}'s Blog by month"
-                          href="{{ site.url}}{{ site.baseurl }}//postsbydate">date</a>
-            </div>
-
-            <div id="search">
-              <form role="search" method="get" action="{{ site.baseurl }}//search/">
-                  <input id="searchString" name="searchString"
-                          placeholder="Be a Better Developer, etc." type="text">
-                  <input id="searchButton" name="googleSearchName" type="submit" value="Search">
-              </form>
-            </div>
+        <div class="container">
+          <div id="archives">
+            browse by <a title="The complete archive of {{ site.name }}'s Blog by category"
+                         href="{{ site.url }}{{ site.baseurl}}/postsbycategory">category</a> or
+                      <a title="The complete archive of {{ site.name }}'s Blog by month"
+                         href="{{ site.url}}{{ site.baseurl }}//postsbydate">date</a>
           </div>
-
         </div>
       </div>
     </div>
