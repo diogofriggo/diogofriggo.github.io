@@ -1,216 +1,120 @@
-# How to initialize a vector filled with a constant (macro for beginners)
+> March, 2016: If you're on an old version of Jekyll Now and run into a) build warnings or b) syntax highlighting issues caused by [Jekyll 3 and GitHub Pages updates](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0), just :sparkles:[update your _config.yml](https://github.com/barryclark/jekyll-now/pull/445/files):sparkles: and you'll be set!
 
-We're looking for a concise way to get a vector of `n` elements, all initialized with the same specified `constant`
+# Jekyll Now
 
-```rust
-let vec: Vec<usize> = vec![1, 1, 1, 1, 1, ..., n];
-```
+**Jekyll** is a static site generator that's perfect for GitHub hosted blogs ([Jekyll Repository](https://github.com/jekyll/jekyll))
 
-The `vec!` macro is our friend here. This is as simple as:
+**Jekyll Now** makes it easier to create your Jekyll blog, by eliminating a lot of the up front setup.
 
-```rust
-let vec = vec![1usize; 5];
-println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+- You don't need to touch the command line
+- You don't need to install/configure ruby, rvm/rbenv, ruby gems :relaxed:
+- You don't need to install runtime dependencies like markdown processors, Pygments, etc
+- If you're on Windows, this will make setting up Jekyll a lot easier
+- It's easy to try out, you can just delete your forked repository if you don't like it
 
-Before learning this trick I would do some unnecessary heavy lifting like
+In a few minutes you'll be set up with a minimal, responsive blog like the one below giving you more time to spend on writing epic blog posts!
 
-```rust
-let vec = (0..5).map(|_| 1).collect::<Vec<usize>>();
-println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+![Jekyll Now Theme Screenshot](/images/jekyll-now-theme-screenshot.jpg "Jekyll Now Theme Screenshot")
 
-But how does Rust do it? Let us try to reproduce it
+## Quick Start
 
-Macro syntax is cryptic amd confusing so let's approach it step by step
+### Step 1) Fork Jekyll Now to your User Repository
 
-The body of an empty macro looks like this
+Fork this repo, then rename the repository to yourgithubusername.github.io.
 
-```rust
-macro_rules! our_vec {
-    (  ) => {
+Your Jekyll blog will often be viewable immediately at <https://yourgithubusername.github.io> (if it's not, you can often force it to build by completing step 2)
 
-    };
-}
-```
+![Step 1](/images/step1.gif "Step 1")
 
-That's an empty `match` arm with an empty pattern.
+### Step 2) Customize and view your site
 
-Let's add a pattern
+Enter your site name, description, avatar and many other options by editing the _config.yml file. You can easily turn on Google Analytics tracking, Disqus commenting and social icons here too.
 
-```rust
-macro_rules! our_vec {
-    ( $constant:expr; $n:expr ) => {
+Making a change to _config.yml (or any file in your repository) will force GitHub Pages to rebuild your site with jekyll. Your rebuilt site will be viewable a few seconds later at <https://yourgithubusername.github.io> - if not, give it ten minutes as GitHub suggests and it'll appear soon
 
-    };
-}
-```
+> There are 3 different ways that you can make changes to your blog's files:
 
-We now match on a pattern of two expressions separated by a semicolon.
+> 1. Edit files within your new username.github.io repository in the browser at GitHub.com (shown below).
+> 2. Use a third party GitHub content editor, like [Prose by Development Seed](http://prose.io). It's optimized for use with Jekyll making markdown editing, writing drafts, and uploading images really easy.
+> 3. Clone down your repository and make updates locally, then push them to your GitHub repository.
 
-We name them as `constant` and `n`
+![_config.yml](/images/config.png "_config.yml")
 
-Let's now create a `Vec` with a capacity for `n` items
+### Step 3) Publish your first blog post
 
-```rust
-macro_rules! our_vec {
-    ( $constant:expr; $n:expr ) => {
-        { // expression block begins here
-            let mut temp_vec = Vec::with_capacity($n);
-            temp_vec
-        } // expression block ends here
-    };
-}
-```
+Edit `/_posts/2014-3-3-Hello-World.md` to publish your first blog post. This [Markdown Cheatsheet](http://www.jekyllnow.com/Markdown-Style-Guide/) might come in handy.
 
-Notice how we used the captured `$n` variable.
+![First Post](/images/first-post.png "First Post")
 
-Rust is an expression based language and this holds true in macros as well.
+> You can add additional posts in the browser on GitHub.com too! Just hit the + icon in `/_posts/` to create new content. Just make sure to include the [front-matter](http://jekyllrb.com/docs/frontmatter/) block at the top of each new blog post and make sure the post's filename is in this format: year-month-day-title.md
 
-That's why we created a `{}` block and put our code inside it. The last statement of the block is the return value so
-this means we are returning `temp_vec`
+## Local Development
 
-This vector however does not hold any element yet. Let's add one
+1. Install Jekyll and plug-ins in one fell swoop. `gem install github-pages` This mirrors the plug-ins used by GitHub Pages on your local machine including Jekyll, Sass, etc.
+2. Clone down your fork `git clone https://github.com/yourusername/yourusername.github.io.git`
+3. Serve the site and watch for markup/sass changes `jekyll serve`
+4. View your website at http://127.0.0.1:4000/
+5. Commit any changes and push everything to the master branch of your GitHub user repository. GitHub Pages will then rebuild and serve your website.
 
-```rust
-macro_rules! our_vec {
-    ( $constant:expr; $n:expr ) => {
-        {
-            let mut temp_vec = Vec::with_capacity($n);
-            temp_vec.push($constant)
-            temp_vec
-        }
-    };
-}
-```
+## Moar!
 
-At this point let's check what our macro gives us
+I've created a more detailed walkthrough, [**Build A Blog With Jekyll And GitHub Pages**](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/) over at the Smashing Magazine website. Check it out if you'd like a more detailed walkthrough and some background on Jekyll. :metal:
 
-```rust
-let vec = our_vec![1; 5];
-println!("{:?}", vec); // [1]
-```
+It covers:
 
-Neat! We're getting a `Vec` with one element in it. Let's turn that into `n` elements
+- A more detailed walkthrough of setting up your Jekyll blog
+- Common issues that you might encounter while using Jekyll
+- Importing from Wordpress, using your own domain name, and blogging in your favorite editor
+- Theming in Jekyll, with Liquid templating examples
+- A quick look at Jekyll 2.0’s new features, including Sass/Coffeescript support and Collections
 
-```rust
-macro_rules! our_vec {
-    ( $constant:expr; $n:expr ) => {
-        {
-            let mut temp_vec = Vec::with_capacity($n);
-            (0..$n).for_each(|_| temp_vec.push($constant));
-            temp_vec
-        }
-    };
-}
-```
+## Jekyll Now Features
 
-```rust
-let vec = our_vec![1; 5];
-println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+✓ Command-line free _fork-first workflow_, using GitHub.com to create, customize and post to your blog  
+✓ Fully responsive and mobile optimized base theme (**[Theme Demo](http://jekyllnow.com)**)  
+✓ Sass/Coffeescript support using Jekyll 2.0  
+✓ Free hosting on your GitHub Pages user site  
+✓ Markdown blogging  
+✓ Syntax highlighting  
+✓ Disqus commenting  
+✓ Google Analytics integration  
+✓ SVG social icons for your footer  
+✓ 3 http requests, including your avatar  
 
-Awesome, it works! Our macro converted the above code into this
+✘ No installing dependencies
+✘ No need to set up local development  
+✘ No configuring plugins  
+✘ No need to spend time on theming  
+✘ More time to code other things ... wait ✓!  
 
-```rust
-let vec = {
-    let mut temp_vec = Vec::with_capacity(5);
-    (0..5).for_each(|_| temp_vec.push(1));
-    temp_vec
-};
-println!("{:?}", vec); // [1, 1, 1, 1, 1]
-```
+## Questions?
 
-Rust is open-source so let's [peek at how they do it](https://doc.rust-lang.org/src/alloc/macros.rs.html#42-52) and compare with our approach
+[Open an Issue](https://github.com/barryclark/jekyll-now/issues/new) and let's chat!
 
-```rust
-macro_rules! vec {
-    () => (
-        $crate::__rust_force_expr!($crate::vec::Vec::new())
-    );
-    ($elem:expr; $n:expr) => (
-        $crate::__rust_force_expr!($crate::vec::from_elem($elem, $n))
-    );
-    ($($x:expr),+ $(,)?) => (
-        $crate::__rust_force_expr!(<[_]>::into_vec(box [$($x),+]))
-    );
-}
-```
+## Other forkable themes
 
-We can see that they've got more match arms for the other uses of the `vec!` macro, we're focusing only on the second branch.
+You can use the [Quick Start](https://github.com/barryclark/jekyll-now#quick-start) workflow with other themes that are set up to be forked too! Here are some of my favorites:
 
-We can safely ignore the `__rust_force_expr` macro since it only serves the [purpose of improving error messages](https://stackoverflow.com/questions/70402502/what-exactly-does-rust-force-expr-do)
+- [Hyde](https://github.com/poole/hyde) by MDO
+- [Lanyon](https://github.com/poole/lanyon) by MDO
+- [mojombo.github.io](https://github.com/mojombo/mojombo.github.io) by Tom Preston-Werner
+- [Left](https://github.com/holman/left) by Zach Holman
+- [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) by Michael Rose
+- [Skinny Bones](https://github.com/mmistakes/skinny-bones-jekyll) by Michael Rose
 
-The core behaviour is within the `vec::from_elem` function
+## Credits
 
-```rust
-pub fn from_elem_in<T: Clone, A: Allocator>(elem: T, n: usize, alloc: A) -> Vec<T, A> {
-    <T as SpecFromElem>::from_elem(elem, n, alloc)
-}
-```
+- [Jekyll](https://github.com/jekyll/jekyll) - Thanks to its creators, contributors and maintainers.
+- [SVG icons](https://github.com/neilorangepeel/Free-Social-Icons) - Thanks, Neil Orange Peel. They're beautiful.
+- [Solarized Light Pygments](https://gist.github.com/edwardhotchkiss/2005058) - Thanks, Edward.
+- [Joel Glovier](http://joelglovier.com/writing/) - Great Jekyll articles. I used Joel's feed.xml in this repository.
+- [David Furnes](https://github.com/dfurnes), [Jon Uy](https://github.com/jonuy), [Luke Patton](https://github.com/lkpttn) - Thanks for the design/code reviews.
+- [Bart Kiers](https://github.com/bkiers), [Florian Simon](https://github.com/vermluh), [Henry Stanley](https://github.com/henryaj), [Hun Jae Lee](https://github.com/hunjaelee), [Javier Cejudo](https://github.com/javiercejudo), [Peter Etelej](https://github.com/etelej), [Ben Abbott](https://github.com/jaminscript), [Ray Nicholus](https://github.com/rnicholus), [Erin Grand](https://github.com/eringrand), [Léo Colombaro](https://github.com/LeoColomb), [Dean Attali](https://github.com/daattali), [Clayton Errington](https://github.com/cjerrington), [Colton Fitzgerald](https://github.com/coltonfitzgerald), [Trace Mayer](https://github.com/sunnankar) - Thanks for your [fantastic contributions](https://github.com/barryclark/jekyll-now/commits/master) to the project!
 
-Hm, the call is being delegated to `SpecFromElem::from_elem`, what does that do?
+## Contributing
 
-```rust
-fn from_elem<A: Allocator>(elem: i8, n: usize, alloc: A) -> Vec<i8, A> {
-    if elem == 0 {
-        return Vec { buf: RawVec::with_capacity_zeroed_in(n, alloc), len: n };
-    }
-    unsafe {
-        let mut v = Vec::with_capacity_in(n, alloc);
-        ptr::write_bytes(v.as_mut_ptr(), elem as u8, n);
-        v.set_len(n);
-        v
-    }
-}
-```
+Issues and Pull Requests are greatly appreciated. If you've never contributed to an open source project before I'm more than happy to walk you through how to create a pull request.
 
-Finally, there it is.
+You can start by [opening an issue](https://github.com/barryclark/jekyll-now/issues/new) describing the problem that you're looking to resolve and we'll go from there.
 
-If `elem` (we named it `constant`) is the constant `0`, rust takes a performant shortcut: initializes and returns `Vec` with capacity `n` filled with zeros
-
-If `elem` is anything else Rust resorts to an unsafe block to be able to write bytes directly with our provided `constant`, then sets `vec`'s `len` and returns it
-
-This is foundational code used very frequently by any code base, so it was to be expected that Rust would not use our loop approach. It must be fast!
-
-Rust had to resort to pointers and the Dark arts of unsafe code to achieve that performance gain.
-
-For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
-
-Bonus tip: just like Rust's `vec!` our `our_vec!` macro can be nested, to produce Vec of Vecs!
-
-```rust
-let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
-println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
-```
-
-Here's the full code we built for you to try
-
-```rust
-macro_rules! our_vec {
-    ( $constant:expr; $n:expr ) => {
-        {
-            let mut temp_vec = Vec::with_capacity($n);
-            (0..$n).for_each(|_| temp_vec.push($constant));
-            temp_vec
-        }
-    };
-}
-
-fn main() {
-    let vec = vec![1usize; 5];
-    println!("{:?}", vec); // [1, 1, 1, 1, 1]
-
-    let vec = (0..5).map(|_| 1).collect::<Vec<usize>>();
-    println!("{:?}", vec); // [1, 1, 1, 1, 1]
-
-    let vec: Vec<usize> = our_vec![1; 5];
-    println!("{:?}", vec); // [1, 1, 1, 1, 1]
-
-    let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
-    println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
-}
-```
-
-Macros are not an easy topic in Rust, they can feel quite alien until you get the hang of it,
-so I hope this has been clear enough to be useful and has encouraged you to write your own macros!
+I want to keep Jekyll Now as minimal as possible. Every line of code should be one that's useful to 90% of the people using it. Please bear that in mind when submitting feature requests. If it's not something that most people will use, it probably won't get merged. :guardsman:
