@@ -1,7 +1,5 @@
 ---
 layout: post
-comments: true
-comment: true
 title: Macro for beginners
 date: 2022-05-11 10:41:00 -0300
 ---
