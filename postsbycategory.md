@@ -29,4 +29,5 @@ permalink: /postsbycategory/
                 </h3>
             {% endif %}
         {% endfor %}
+    {% endfor %}
 </div>
