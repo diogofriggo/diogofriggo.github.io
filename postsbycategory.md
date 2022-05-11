@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Post by Category
-permalink: /categoryview/
+title: Posts by Category
+permalink: /postsbycategory/
 ---
 
 <div>
