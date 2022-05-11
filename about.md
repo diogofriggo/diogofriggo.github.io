@@ -17,6 +17,6 @@ beginner-level content and the very high-end pro content. It's hard to find some
 
 This blog tries to help fill that gap.
 
-### How to find me
+### How to reach me
 
 [diogofriggobr@gmail.com](diogofriggobr@gmail.com)
