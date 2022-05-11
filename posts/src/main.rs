@@ -1,4 +1,4 @@
-macro_rules! my_vec {
+macro_rules! our_vec {
     ( $constant:expr; $n:expr ) => {
         {
             let mut temp_vec = Vec::with_capacity($n);
@@ -18,6 +18,9 @@ fn main() {
     let vec: Vec<usize> = Vec::with_capacity(5);
     println!("{:?}", vec); // []
 
-    let vec: Vec<usize> = my_vec![1; 5];
+    let vec: Vec<usize> = our_vec![1; 5];
     println!("{:?}", vec); // [1, 1, 1, 1, 1]
+
+    let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
+    println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 }
