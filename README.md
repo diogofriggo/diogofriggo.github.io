@@ -177,7 +177,14 @@ Rust had to resort to pointers and the Dark arts of unsafe code to achieve that 
 
 For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
 
-Here's the full code we built:
+Bonus tip: just like Rust's `vec!` our `our_vec!` macro can be nested, to produce Vec of Vecs!
+
+```rust
+let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
+println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
+```
+
+Here's the full code we built for you to try
 
 ```rust
 macro_rules! our_vec {
@@ -203,13 +210,6 @@ fn main() {
     let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
     println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 }
-```
-
-Bonus tip: just like Rust's `vec!` our `our_vec!` macro can be nested, to produce Vec of Vecs!
-
-```rust
-let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
-println!("{:?}", vec_of_vecs); // [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 ```
 
 Macros are not an easy topic in Rust, they can feel quite alien until you get the hang of it,
