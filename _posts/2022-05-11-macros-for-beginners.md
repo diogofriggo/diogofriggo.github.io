@@ -184,7 +184,7 @@ Rust had to resort to pointers and the **Dark** arts of unsafe code to achieve t
 
 For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
 
-    Bonus tip: just like Rust's `vec!` our `our_vec!` macro can be nested, to produce Vec of Vecs!
+Bonus tip: just like Rust's `vec!` our `our_vec!` macro can be nested, to produce Vec of Vecs!
 
 {% highlight rust %}
 let vec_of_vecs = our_vec![our_vec![1usize; 5]; 2];
