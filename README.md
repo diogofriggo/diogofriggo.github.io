@@ -47,10 +47,10 @@ Let's now create a `Vec` with a capacity for `n` items
 ```rust
 macro_rules! my_vec {
     ( $constant:expr; $n:expr ) => {
-        {
+        { // expression block begins here
             let mut temp_vec = Vec::with_capacity($n);
             temp_vec
-        }
+        } // expression block ends here
     };
 }
 ```
@@ -112,7 +112,7 @@ let vec = {
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
 ```
 
-Rust is open-source so let's peek at how they do it and compare with our approach
+Rust is open-source so let's [peek at how they do it]{https://doc.rust-lang.org/src/alloc/macros.rs.html#42-52} and compare with our approach
 
 ```rust
 macro_rules! vec {
@@ -128,6 +128,36 @@ macro_rules! vec {
 }
 ```
 
-You can see that they've got more match arms for the other uses of the `vec!` macro, we're focusing only on the second branch.
+We can see that they've got more match arms for the other uses of the `vec!` macro, we're focusing only on the second branch.
 
+We can safely ignore the `__rust_force_expr` macro since it only serves the [purpose of improving error messages]{https://stackoverflow.com/questions/70402502/what-exactly-does-rust-force-expr-do}
 
+The core behaviour is within the `vec::from_elem` call
+
+```rust
+pub fn from_elem_in<T: Clone, A: Allocator>(elem: T, n: usize, alloc: A) -> Vec<T, A> {
+    <T as SpecFromElem>::from_elem(elem, n, alloc)
+}
+```
+
+Hm, the call is being delegated to `SpecFromElem::from_elem`, what does that do?
+
+```rust
+fn from_elem<A: Allocator>(elem: i8, n: usize, alloc: A) -> Vec<i8, A> {
+    if elem == 0 {
+        return Vec { buf: RawVec::with_capacity_zeroed_in(n, alloc), len: n };
+    }
+    unsafe {
+        let mut v = Vec::with_capacity_in(n, alloc);
+        ptr::write_bytes(v.as_mut_ptr(), elem as u8, n);
+        v.set_len(n);
+        v
+    }
+}
+```
+
+Finally, there it is. If `elem` (we named it `constant`) is the constant `0`, rust takes a performant shortcut: initializes and returns `Vec` with capacity `n`
+If `elem` is anything else Rust resorts to an unsafe block to be able to write bytes directly. Sets `vec`'s `len` and returns it
+This is foundational code used very frequently by any code base, so it was to be expected that Rust would not use our loop approach. It must be fast!
+Rust had to resort to pointers and the Dark arts of unsafe code to achieve that performance gain.
+For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
