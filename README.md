@@ -1,6 +1,6 @@
 # How to initialize a vector filled with a constant (macro for beginners)
 
-We're looking for a quick way to get a vector of `n` elements, all initialized with the same specified `constant`
+We're looking for a concise way to get a vector of `n` elements, all initialized with the same specified `constant`
 
 ```rust
 let vec: Vec<usize> = vec![1, 1, 1, 1, 1, ..., n];
@@ -16,7 +16,7 @@ println!("{:?}", vec); // [1, 1, 1, 1, 1]
 Before learning this trick I would do some unnecessary heavy lifting like
 
 ```rust
-let vec = (0..5).map(|_| 0).collect::<Vec<usize>>();
+let vec = (0..5).map(|_| 1).collect::<Vec<usize>>();
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
 ```
 
