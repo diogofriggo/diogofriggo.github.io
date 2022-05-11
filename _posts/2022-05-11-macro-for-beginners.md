@@ -4,6 +4,7 @@ title: Macro for beginners
 date: 2022-05-11 10:41:00 -0300
 categories: [rust macro]
 tags: [rust macro]
+comments: true
 ---
 
 How to initialize a vector filled with a constant
@@ -181,7 +182,7 @@ If `elem` is anything else Rust resorts to an unsafe block to be able to write b
 
 This is foundational code used very frequently by any code base, so it was to be expected that Rust would not use our loop approach. It must be fast!
 
-Rust had to resort to pointers and the Dark arts of unsafe code to achieve that performance gain.
+Rust had to resort to pointers and the **Dark** arts of unsafe code to achieve that performance gain.
 
 For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
 

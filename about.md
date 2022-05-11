@@ -4,12 +4,19 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hi I'm Diogo! I live in the south of Brazil and created this blog to share useful insights into things that I work on
 
-### More Information
+In particular you'll see lots of posts about the rust language as I apply it to solve problems in the wind energy industry.
 
-A place to include any other types of information that you'd like to include about yourself.
+On occasion you might see posts about other languages like Elixir or Haskell and also posts about CFD and animation, stay tuned!
 
-### Contact me
+### Why another Rust blog
 
-[email@domain.com](mailto:email@domain.com)
+Despite the great community effort to ease the steep Rust learning curve, I still think there's a huge gap between
+beginner-level content and the very high-end pro content. It's hard to find something in between.
+
+This blog tries to help fill that gap.
+
+### How to find me
+
+[diogofriggobr@gmail.com](diogofriggobr@gmail.com)
