@@ -5,7 +5,7 @@ date: 2022-05-11 10:41:00 -0300
 categories: [macros]
 ---
 
-# How to initialize a vector filled with a constant
+## How to initialize a vector filled with a constant
 
 We're looking for a concise way to get a vector of `n` elements, all initialized with the same specified `constant`
 
