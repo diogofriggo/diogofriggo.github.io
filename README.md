@@ -20,7 +20,7 @@ let vec = (0..5).map(|_| 1).collect::<Vec<usize>>();
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
 ```
 
-But how Rust does it? Let us try to reproduce it
+But how does Rust do it? Let us try to reproduce it
 
 Macro syntax is cryptic amd confusing so let's approach it step by step
 
