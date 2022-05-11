@@ -121,7 +121,7 @@ let vec = {
 println!("{:?}", vec); // [1, 1, 1, 1, 1]
 ```
 
-Rust is open-source so let's [peek at how they do it]{https://doc.rust-lang.org/src/alloc/macros.rs.html#42-52} and compare with our approach
+Rust is open-source so let's [peek at how they do it](https://doc.rust-lang.org/src/alloc/macros.rs.html#42-52) and compare with our approach
 
 ```rust
 macro_rules! vec {
@@ -139,7 +139,7 @@ macro_rules! vec {
 
 We can see that they've got more match arms for the other uses of the `vec!` macro, we're focusing only on the second branch.
 
-We can safely ignore the `__rust_force_expr` macro since it only serves the [purpose of improving error messages]{https://stackoverflow.com/questions/70402502/what-exactly-does-rust-force-expr-do}
+We can safely ignore the `__rust_force_expr` macro since it only serves the [purpose of improving error messages](https://stackoverflow.com/questions/70402502/what-exactly-does-rust-force-expr-do)
 
 The core behaviour is within the `vec::from_elem` function
 
