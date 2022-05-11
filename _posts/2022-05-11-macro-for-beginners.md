@@ -2,6 +2,7 @@
 layout: post
 title: Macro for beginners
 date: 2022-05-11 10:41:00 -0300
+categories: [macros]
 ---
 
 How to initialize a vector filled with a constant
