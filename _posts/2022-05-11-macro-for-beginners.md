@@ -1,10 +1,9 @@
 ---
 layout: post
 comments: true
+comment: true
 title: Macro for beginners
 date: 2022-05-11 10:41:00 -0300
-categories: [rust macro]
-tags: [rust macro]
 ---
 
 How to initialize a vector filled with a constant
