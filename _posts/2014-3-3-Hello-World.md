@@ -1,6 +1,10 @@
 ---
 layout: post
 title: You're up and running!
+published: false
+date: 2022-05-11
+categories: [blogging]
+tags: [blogging]
 ---
 
 Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below).

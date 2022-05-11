@@ -1,9 +1,15 @@
+---
 layout: post
 title: "Macro for beginners or how to initialize a vector filled with a constant"
+published: true
 date: 2022-05-11 10:41:00 -0300
-categories: rust macro
+categories: [rust] [macro]
+tags: [rust] [macro]
+---
 
-# Macro for beginners or how to initialize a vector filled with a constant
+# Macro for beginners
+
+How to initialize a vector filled with a constant?
 
 We're looking for a concise way to get a vector of `n` elements, all initialized with the same specified `constant`
 
