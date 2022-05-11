@@ -23,6 +23,7 @@ println!("{:?}", vec); // [1, 1, 1, 1, 1]
 But how is it done? Let us try to reproduce it
 
 Macro syntax is cryptic amd confusing so let's approach it step by step
+
 The body of an empty macro looks like this
 
 ```rust
@@ -46,6 +47,7 @@ macro_rules! our_vec {
 ```
 
 We now match on a pattern of two expressions separated by a semicolon.
+
 We name them as `constant` and `n`
 
 Let's now create a `Vec` with a capacity for `n` items
@@ -64,6 +66,7 @@ macro_rules! our_vec {
 Notice how we used the captured `$n` variable.
 
 Rust is an expression based language and this holds true in macros as well.
+
 That's why we created a `{}` block and put our code inside it. The last statement of the block is the return value so
 this means we are returning `temp_vec`
 
@@ -162,10 +165,16 @@ fn from_elem<A: Allocator>(elem: i8, n: usize, alloc: A) -> Vec<i8, A> {
 }
 ```
 
-Finally, there it is. If `elem` (we named it `constant`) is the constant `0`, rust takes a performant shortcut: initializes and returns `Vec` with capacity `n` filled with zeros
+Finally, there it is.
+
+If `elem` (we named it `constant`) is the constant `0`, rust takes a performant shortcut: initializes and returns `Vec` with capacity `n` filled with zeros
+
 If `elem` is anything else Rust resorts to an unsafe block to be able to write bytes directly with our provided `constant`, then sets `vec`'s `len` and returns it
+
 This is foundational code used very frequently by any code base, so it was to be expected that Rust would not use our loop approach. It must be fast!
+
 Rust had to resort to pointers and the Dark arts of unsafe code to achieve that performance gain.
+
 For the purposes of this post you can regard `alloc` as an internal implementation detail, a topic not frequently encountered in everyday code.
 
 Here's the full code we built:
