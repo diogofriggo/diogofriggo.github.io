@@ -2,6 +2,7 @@
 layout: page
 title: Posts by Category
 permalink: /postsbycategory/
+sitemap: false
 ---
 
 <div>
