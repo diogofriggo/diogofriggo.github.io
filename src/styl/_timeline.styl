@@ -87,6 +87,16 @@ section
 		color secondary-text
 		border-left 4px solid primary
 		padding 0 20px
+	.date
+		background accent
+		display inline-block
+		color text
+		padding 10px
+		position absolute
+		top 0
+		right 0
+		z-index 1000
+
 
 .timeline
 	a
@@ -133,6 +143,10 @@ section
 			background-image url('../img/first-computer.png')
 			background-size contain
 
+.timeline-item
+	.timeline-img-header
+		background-image url('https://picsum.photos/1000/800/?random')
+
 .timeline-img-header
 	height 200px
 	position relative
@@ -141,17 +155,6 @@ section
 		position absolute
 		bottom 5px
 		left 20px
-
-.date
-	background accent
-	display inline-block
-	color text
-	padding 10px
-	position absolute
-	top 0
-	right 0
-	z-index 1000
-
 
 @media screen and (max-width 768px)
 	.timeline
