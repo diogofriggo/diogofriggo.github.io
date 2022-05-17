@@ -73,6 +73,8 @@ section
     border-radius 4px
     background #f5f5f5
     box-shadow 0 20px 25px -15px rgba(0, 0, 0, .3)
+    ul
+        margin-left 3%
     &::after
         content ''
         position absolute
@@ -88,6 +90,8 @@ section
         color secondary-text
         border-left 4px solid primary
         padding 0 20px
+        font-size 23px
+        font-weight 600
     .date
         background accent
         display inline-block
@@ -100,7 +104,7 @@ section
 
 
 .timeline
-    a:not(.vanilla)
+    a.bnt-more
         background primary
         color text
         padding 8px 20px
@@ -116,8 +120,6 @@ section
             background darken(primary, 10%)
             color text
             text-decoration none
-    a.vanilla
-        margin-left 0
 
 
 .timeline-img
@@ -134,7 +136,7 @@ section
     padding 0!important
     p
         padding 0 20px
-    a
+    a.bnt-more
         margin-left 20px
 
 .timeline-item
@@ -144,7 +146,7 @@ section
         background-size cover
         background-repeat no-repeat
         &.my-first-computer
-            background-image url('../img/first-computer.png')
+            background-image url('../img/first-computer.jpg')
             background-size contain
             background-color white
         &.wind-turbines
@@ -154,7 +156,7 @@ section
         &.graphic-calculator
             background-image url('../img/graphic-calculator.png')
             background-size contain
-            background-color white
+            background-color black
         &.csharp-course
             background-image url('../img/csharp-course.jpg')
             background-size contain
@@ -163,10 +165,52 @@ section
             background-image url('../img/hacker.jpg')
             background-size contain
             background-color black
-        &.computer-science
-            background-image url('../img/computer-science.jpg')
+        &.computer-science-part-1
+            background-image url('../img/computer-science-part-1.jpg')
             background-size contain
             background-color black
+        &.computer-science-part-2
+            background-image url('../img/computer-science-part-2.jpg')
+            background-size contain
+            background-color black
+        &.assembly-parser
+            background-image url('../img/assembly-parser.png')
+            background-size cover
+            background-color black
+        &.the-path-to-ufrgs
+            background-image url('../img/the-path-to-ufrgs.jpg')
+            background-size cover
+            background-color white
+        &.student-to-business
+            background-image url('../img/student-to-business.png')
+            background-size contain
+            background-color white
+            background-position top
+        &.hcl-part-1
+            background-image url('../img/hcl-part-1.jpg')
+            background-size contain
+            background-color white
+        &.hcl-part-2
+            background-image url('../img/hcl-part-2.jpg')
+            background-size cover
+            background-color black
+        &.keyboard
+            background-image url('../img/keyboard.png')
+            background-size cover
+            background-color white
+        &.dev-at-hcl
+            background-image url('../img/dev-at-hcl.jpg')
+            background-size cover
+            background-color white
+        &.ufrgs
+            background-image url('../img/ufrgs.png')
+            background-size contain
+            background-color white
+        &.unity-game
+            background-image url('../img/unity-game.jpg')
+            background-size cover
+            background-color white
+
 
 .timeline-item
     .timeline-img-header
@@ -193,7 +237,7 @@ section
         .timeline-content
             max-width 100%
             width auto
-            margin-left 70px
+            margin-left 53px
 
         .timeline-item
             &:nth-child(even)
