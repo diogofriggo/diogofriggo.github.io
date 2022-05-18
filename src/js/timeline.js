@@ -3,6 +3,17 @@ $(function(){
     window.sr = ScrollReveal();
 
     if ($(window).width() < 768) {
+      // disable effects
+      if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft');
+      }
+
+      if ($('.timeline-content').hasClass('js--fadeInRight')) {
+        $('.timeline-content').removeClass('js--fadeInRight');
+      }
+    }
+
+    if ($(window).width() < 768) {
 
         if ($('.timeline-content').hasClass('js--fadeInLeft')) {
             $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');

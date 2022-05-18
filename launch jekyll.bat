@@ -1,0 +1,1 @@
+set HOMEDRIVE=C: && bundle exec jekyll serve --drafts
