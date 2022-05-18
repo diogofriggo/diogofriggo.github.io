@@ -2,3 +2,10 @@ _site
 .sass-cache
 node_modules
 _drafts
+assets/img/icons/apple-touch-icon-114x114.png
+assets/img/icons/apple-touch-icon-144x144.png
+assets/img/icons/apple-touch-icon-152x152.png
+assets/img/icons/apple-touch-icon-76x76.png
+assets/img/icons/largetile.png
+assets/img/icons/mediumtile.png
+assets/img/icons/widetile.png
