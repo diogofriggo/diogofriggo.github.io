@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python Quizz!
+title: Python Quiz!
 date: 2022-06-02 09:30:00 -0300
 categories: [python]
 tags:
@@ -8,7 +8,7 @@ tags:
 - quiz
 ---
 
-# Welcome to the daily python quizz
+# Welcome to the daily python quiz
 
 Every day a new question will be posted here, don't miss out!
 
@@ -36,7 +36,7 @@ You can read this data with the following code
 {% highlight python %}
 import pandas as pd
 
-df = pd.read_csv(r'C:\__habits\blog\diogofriggo.github.io\data\2022-06-02-python-quizz\question2.csv')
+df = pd.read_csv(r'C:\__habits\blog\diogofriggo.github.io\data\2022-06-02-python-quiz\xyz.csv')
 {% endhighlight %}
 
 Let's say this table is too big to open in excel and that's why you chose Python
@@ -91,7 +91,7 @@ Imagine you have a very large csv file that cannot be opened in Excel and you on
 Use this sample file:
 
 {% highlight python %}
-path = r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/question2.csv'
+path = r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quiz/xyz.csv'
 {% endhighlight %}
 
 It looks like this:
@@ -114,7 +114,13 @@ import pandas as pd
 df = pd.read_csv(path)
 {% endhighlight %}
 
-How do you copy to the clipboard the last 10 lines of this table?
+The first five lines of the dataframe can be displayed with this code
+
+{% highlight python %}
+print(df.iloc[:5])
+{% endhighlight %}
+
+How do you copy to the clipboard the last 10 lines of this table? (Once on your clipboard you can just paste it into excel)
 
 The result looks like this:
 
