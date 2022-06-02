@@ -1,3 +1,2 @@
-cd "C:\__habits\blog\diogofriggo.github.io"
-set HOMEDRIVE=C: && bundle exec jekyll serve --drafts
-gulp in another terminal
+cd "C:\__habits\blog\diogofriggo.github.io" && set HOMEDRIVE=C: && bundle exec jekyll serve --drafts
+cd "C:\__habits\blog\diogofriggo.github.io" && gulp
