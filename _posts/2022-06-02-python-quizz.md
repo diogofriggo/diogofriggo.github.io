@@ -137,6 +137,8 @@ The result looks like this:
 |360546|2012576|110.000005|
 |360596|2012576|109.999952|
 
+Comment your answer below!
+
 ## Question 1
 
 What is the output of the following code?
