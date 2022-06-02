@@ -14,6 +14,8 @@ Every day a new question will be posted here, don't miss out!
 
 Feel free to look up on google / stackoverflow or run the code on your computer.
 
+You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) and run it there to see the results.
+
 ## Question 1
 
 What is the output of the following code?
