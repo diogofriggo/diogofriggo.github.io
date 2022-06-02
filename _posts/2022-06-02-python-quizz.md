@@ -91,7 +91,7 @@ Imagine you have a very large csv file that cannot be opened in Excel and you on
 Use this sample file:
 
 {% highlight python %}
-path = r'C:\__habits\blog\diogofriggo.github.io\data\2022-06-02-python-quizz\question2.csv'
+path = r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/question2.csv'
 {% endhighlight %}
 
 It looks like this:
@@ -115,6 +115,21 @@ df = pd.read_csv(path)
 {% endhighlight %}
 
 How do you copy to the clipboard the last 10 lines of this table?
+
+The result looks like this:
+
+|X     |Y      |Z         |
+|------|-------|----------|
+|360146|2012576|109.999965|
+|360196|2012576|110.000009|
+|360246|2012576|109.999972|
+|360296|2012576|110.000036|
+|360346|2012576|110.000057|
+|360396|2012576|109.999886|
+|360446|2012576|109.999994|
+|360496|2012576|109.999951|
+|360546|2012576|110.000005|
+|360596|2012576|109.999952|
 
 ## Question 1
 
