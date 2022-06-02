@@ -21,7 +21,7 @@ You can also paste your python code on [this website](https://www.programiz.com/
 What is the output of the following code?
 
 {% highlight python %}
-masts = ['M1', 'M2', 'M3']
+masts = ['ZA7401', 'ZA7402', 'ZA7403']
 print(masts[::-1])
 {% endhighlight %}
 
