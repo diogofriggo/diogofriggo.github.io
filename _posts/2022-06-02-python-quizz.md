@@ -120,7 +120,7 @@ The first five lines of the dataframe can be displayed with this code
 print(df.iloc[:5])
 {% endhighlight %}
 
-How do you copy to the clipboard the last 10 lines of this table? (Once on your clipboard you can just paste it into excel)
+How do you copy to the clipboard the last 10 lines of this table? Once on your clipboard you can just paste it into excel
 
 The result looks like this:
 
@@ -137,7 +137,7 @@ The result looks like this:
 |360546|2012576|110.000005|
 |360596|2012576|109.999952|
 
-Comment your answer below!
+Comment your answer below! Don't forget you can paste the code into [this website](https://www.programiz.com/python-programming/online-compiler/) and experiment with it!
 
 ## Question 1
 
@@ -151,3 +151,36 @@ print(masts[::-1])
 Create a disqus account and answer below with the #q1 hashtag.
 
 Your answer will only appear publicly after the next question is posted.
+
+#### Answer
+
+You aced it! The answer is `['ZA7403', 'ZA7402', 'ZA7401']`
+
+In Python you can index a list with the syntax `[start:stop:step]`.
+
+If you don't provide `start` Python uses `0`,
+if you don't provide `stop` it assumes `len(list)` (last element + 1) and the default value for `step` is `1`.
+
+Look at the following example. Remember that **Python always start indexing at `0`.**
+
+Also, stop is **not inclusive** as you can check below
+
+{% highlight python %}
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+# element 0: 1
+# element 1: 2
+# element 2: 3
+# element 3: 4
+# element 4: 5
+# element 5: 6
+# element 6: 7
+# element 7: 8
+print(numbers[1:6:2]) # get me elements from 1 to 6 (but not including 6) in steps of 2
+{% endhighlight %}
+
+In the above we get `element 1`, skip `element 2`, get `element 3`, skip `element 4`, get `element 5` and stop because `element 6` is not included.
+
+The result is `[2, 4, 6]`
+
+A `step` of `-1` is a neat trick to index in reverse order, so we'll get the last element first and then the second-to-last and so on.
+When the step is negative the default values of `start` and `stop` mentioned above don't make sense and you need to know a little more Python to understand why.
