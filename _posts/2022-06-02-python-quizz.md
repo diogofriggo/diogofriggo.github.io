@@ -40,6 +40,9 @@ print(path.is_file()) # False because it doesn't exist
 print(path.is_dir()) # False
 print(path.parent.is_dir()) # True
 
+path = Path('C:') / 'project' / 'report'
+print(path) # C:/project/report.docx
+
 {% endhighlight %}
 
 If you want to try the above code out, paste it into [this **other** website](https://replit.com/languages/python3) which supports pathlib
