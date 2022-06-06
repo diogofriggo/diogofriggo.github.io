@@ -14,7 +14,74 @@ Every day a new question will be posted here, don't miss out!
 
 Feel free to look up on google / stackoverflow or run the code on your computer.
 
-You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) and run it there to see the results.
+You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
+
+<!-- ## Question 4
+
+There are many ways to handle file/folder paths in Python.
+
+Python has evolved over the years. The overall best solution nowadays is to use `pathlib` (a Python standard module - it comes installed by default)
+
+Old solutions include a mix of `glob` and `os.walkdir`. You don't need them.
+
+Take a look at how useful pathlib is:
+
+{% highlight python %}
+from pathlib import Path
+
+path = Path(r'C:\project\report.docx')
+
+print(path.stem) # report
+print(path.suffix) # .docx
+print(path.name) # report.docx
+print(path.parent) # project
+print(path.exists()) # False
+print(path.is_file()) # False because it doesn't exist
+print(path.is_dir()) # False
+print(path.parent.is_dir()) # True
+
+{% endhighlight %}
+
+If you want to try the above code out, paste it into [this **other** website](https://replit.com/languages/python3) which supports pathlib
+
+Let's say you wanted to print the names of all csv files in a folder
+
+Since folder access doesn't work on the online website assume we have a folder with the following files:
+* C:\project\report.docx
+* C:\project\report.pdf
+* C:\project\file1.csv
+* C:\project\file2.csv
+* C:\project\file3.csv
+
+The following code would print only
+
+* C:\project\file1.csv
+* C:\project\file2.csv
+* C:\project\file3.csv
+
+{% highlight python %}
+from pathlib import Path
+
+folder = Path(r'C:\project')
+
+for path in folder.glob('*.csv'):
+    print(path)
+
+{% endhighlight %}
+
+Here comes the question. Assume you have the following folders/files
+
+* C:\project\report.docx
+* C:\project\temp\report-A.pdf
+* C:\project\temp\report-B.pdf
+* C:\project\temp\report-C.pdf
+* C:\project\temp\report-D.pdf
+* C:\project\report-final.pdf
+* C:\project\file1.csv
+* C:\project\file2.csv
+* C:\project\file3.csv
+
+How would you print all .pdf files inside C:\project? Hint: you only need to add **one letter** to the above code. -->
 
 ## Question 3
 
