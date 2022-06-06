@@ -16,7 +16,6 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) and run it there to see the results.
 
-<!---
 ## Question 3
 
 Imagine you have a large table with X, Y and Z columns, the data looks like this
@@ -54,9 +53,9 @@ The result looks like this:
 |360546 |2012576|110.000004628085|2044616.2441866691|
 |360596 |2012576|109.999952210834|2044625.0617391907|
 
-Here are some related operations that could help you understand how to achieve that:
+Here are some related operations that could help you figure out how to achieve that:
 
-#### The length of only the first row may be calculated as
+#### The length of a vector (values from the first row) may be calculated as
 
 {% highlight python %}
 import numpy as np
@@ -82,7 +81,6 @@ Which results in:
 |360596 |2012576|109.999952210834|1651980            |
 
 Given those hints how would you compute the "length" column?
--->
 
 ## Question 2
 
@@ -138,6 +136,18 @@ The result looks like this:
 |360596|2012576|109.999952|
 
 Comment your answer below! Don't forget you can paste the code into [this website](https://www.programiz.com/python-programming/online-compiler/) and experiment with it!
+
+#### Answer
+
+Nice work! The simplest approach was contributed by @Ciro Bezerra
+
+{% highlight python %}
+df.iloc[-10:].to_clipboard()
+{% endhighlight %}
+
+Note that 'clipboard' is the place on each individual computer that text goes when you copy something (CTRL+C).
+
+So `to_clipboard` won't work on the [the website](https://www.programiz.com/python-programming/online-compiler/) as some of you have noticed.
 
 ## Question 1
 
