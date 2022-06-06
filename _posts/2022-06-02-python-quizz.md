@@ -35,7 +35,7 @@ You can read this data with the following code
 {% highlight python %}
 import pandas as pd
 
-df = pd.read_csv(r'C:\__habits\blog\diogofriggo.github.io\data\2022-06-02-python-quizz\xyz.csv')
+df = pd.read_csv(r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/xyz.csv')
 {% endhighlight %}
 
 Let's say this table is too big to open in excel and that's why you chose Python
