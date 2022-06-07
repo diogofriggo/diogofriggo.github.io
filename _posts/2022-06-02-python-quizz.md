@@ -16,6 +16,23 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
 
+<!-- ## Question 5
+
+In Python the easiest way to read a file that has tabular data is with `pd.read_csv`
+
+{% highlight python %}
+import pandas as pd
+
+df1 = pd.read_csv(r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/xyz1.csv')
+df2 = pd.read_csv(r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/xyz2.csv')
+{% endhighlight %}
+
+If df1 and df2 have the same columns (not necessarily in the same order), you may concatenate them with
+
+{% highlight python %}
+df = pd.concat([df1, df2])
+{% endhighlight %} -->
+
 ## Question 4
 
 There are many ways to handle file/folder paths in Python.
