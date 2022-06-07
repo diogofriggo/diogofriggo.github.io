@@ -25,13 +25,19 @@ import pandas as pd
 
 df1 = pd.read_csv(r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/xyz1.csv')
 df2 = pd.read_csv(r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/xyz2.csv')
+df3 = pd.read_csv(r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/xyz3.csv')
 {% endhighlight %}
 
-If df1 and df2 have the same columns (not necessarily in the same order), you may concatenate them with
+If `df1`, `df2` and `df3` have the same columns (not necessarily in the same order), you may concatenate them with
 
 {% highlight python %}
-df = pd.concat([df1, df2])
-{% endhighlight %} -->
+df = pd.concat([df1, df2, df3])
+{% endhighlight %}
+
+This code has a flaw. Answer what the flaw is and write better code.
+
+Hint: what if you had a thousand .csv files? How would you write this code?
+-->
 
 ## Question 4
 
