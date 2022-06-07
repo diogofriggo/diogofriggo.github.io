@@ -16,7 +16,7 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
 
-<!-- ## Question 4
+## Question 4
 
 There are many ways to handle file/folder paths in Python.
 
@@ -75,16 +75,17 @@ for path in folder.glob('*.csv'):
 Here comes the question. Assume you have the following folders/files
 
 * C:\project\report.docx
-* C:\project\temp\report-A.pdf
-* C:\project\temp\report-B.pdf
-* C:\project\temp\report-C.pdf
-* C:\project\temp\report-D.pdf
-* C:\project\report-final.pdf
+* C:\project\report.pdf
 * C:\project\file1.csv
 * C:\project\file2.csv
 * C:\project\file3.csv
+* C:\project\subfolder\file4.csv
 
-How would you print all .pdf files inside C:\project? Hint: you only need to add **one letter** to the above code. -->
+How would you print all .csv files inside C:\project?
+
+Another way to put it is this: how do you traverse folders to find files anywhere in the folder hierarchy, it may be in the root folder or in a deeply nested folder inside it.
+
+Hint: you only need to add **one letter** to the above code.
 
 ## Question 3
 
