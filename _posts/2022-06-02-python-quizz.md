@@ -153,6 +153,26 @@ Which results in:
 
 Given those hints how would you compute the "length" column?
 
+#### Answer
+
+Despite the different answers all of you answered correctly. Well done!
+
+My answer would be
+
+{% highlight python %}
+df['length'] = (df['X']**2 + df['Y']**2 + df['Z']**2).apply(np.sqrt)
+{% endhighlight %}
+
+I'd go with this answer because by using `apply` we can perform any operation, not just ones that exist in numpy, for instance:
+
+{% highlight python %}
+
+def my_custom_transform(value):
+    value * 2 + 3
+
+df['length'] = (df['X']**2 + df['Y']**2 + df['Z']**2).apply(my_custom_transform)
+{% endhighlight %}
+
 ## Question 2
 
 Imagine you have a very large csv file that cannot be opened in Excel and you only need the last 10 lines.
