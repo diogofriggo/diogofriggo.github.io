@@ -16,7 +16,7 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
 
-<!-- ## Question 5
+## Question 5
 
 In Python the easiest way to read a file that has tabular data is with `pd.read_csv`
 
@@ -37,7 +37,7 @@ df = pd.concat([df1, df2, df3])
 This code has a flaw. Answer what the flaw is and write better code.
 
 Hint: what if you had a thousand .csv files? How would you write this code?
--->
+
 
 ## Question 4
 
@@ -109,6 +109,18 @@ How would you print all .csv files inside C:\project?
 Another way to put it is this: how do you traverse folders to find files anywhere in the folder hierarchy, it may be in the root folder or in a deeply nested folder inside it.
 
 Hint: you only need to add **one letter** to the above code.
+
+#### Answer
+
+{% highlight python %}
+from pathlib import Path
+
+folder = Path(r'C:\project')
+
+for path in folder.rglob('*.csv'):
+    print(path)
+
+{% endhighlight %}
 
 ## Question 3
 
