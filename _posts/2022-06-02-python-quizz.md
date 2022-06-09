@@ -16,6 +16,56 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
 
+## Question 6
+
+We are frequently interested in computing monthly averages.
+So given the following data
+
+|stamp              |M0       |M1        |M2       |M3       |M4       |
+|-------------------|---------|----------|---------|---------|---------|
+|2018-02-01 00:00:00|6300.906 |6299.2573 |6300.5864|6301.967 |6299.5825|
+|2018-02-01 00:10:00|         |          |         |         |         |
+|2018-02-01 00:20:00|839.6042 |826.12946 |819.9327 |822.97186|838.7465 |
+|...                |...      |...       |...      |...      |...      |
+|2019-01-14 04:50:00|5840.9204|5822.8438 |5876.861 |5816.889 |         |
+|2019-01-14 05:00:00|         |          |         |         |         |
+|2019-01-14 05:10:00|3806.922 |3632.9902 |3773.146|3932.7952 |3593.6494|
+
+Which can be read with
+
+{% highlight python %}
+from pathlib import Path
+
+import pandas as pd
+
+path = r'C:\__habits\blog\diogofriggo.github.io\data\2022-06-02-python-quizz\masts.csv'
+df = pd.read_csv(path, index_col='stamp')
+df.index = pd.to_datetime(df.index, format='%Y-%m-%d %H:%M:%S')
+...
+{% endhighlight %}
+
+Notice that we explicitly converted the date column using a date format.
+This is good practice because relying on automatic conversion is often the cause of subtle bugs.
+
+How would you aggregate this data and compute the average monthly value for each column?
+
+The following result is expected
+
+|stamp     |M0         |M1         |M2         |M3         |M4         |
+|----------|-----------|-----------|-----------|-----------|-----------|
+|2018-02-28|3182.790672|3155.896489|3166.897374|2969.798941|3108.065888|
+|2018-03-31|3202.755958|3154.444042|3145.965632|2972.840670|3118.956994|
+|2018-04-30|3132.793158|3087.355815|3106.374364|2924.153425|3059.461858|
+|2018-05-31|3145.004857|3088.831630|3129.638827|2931.660587|3052.573197|
+|2018-06-30|3220.298398|3156.571907|3166.012008|2982.580528|3109.262138|
+|2018-07-31|3167.404939|3137.609406|3151.203130|2936.418509|3099.439790|
+|2018-08-31|3244.117772|3226.308685|3226.393634|3036.134585|3180.053468|
+|2018-09-30|3224.100170|3176.540375|3186.701141|2978.785305|3130.259802|
+|2018-10-31|3213.069693|3179.801546|3177.254638|2926.380334|3101.536622|
+|2018-11-30|3110.279586|3087.364842|3068.246916|2855.224892|2998.917573|
+|2018-12-31|3205.605510|3154.213606|3165.648948|2967.999845|3124.375335|
+|2019-01-31|3085.073091|3055.162951|3083.339377|2894.613425|2995.476110|
+
 ## Question 5
 
 In Python the easiest way to read a file that has tabular data is with `pd.read_csv`
@@ -38,6 +88,16 @@ This code has a flaw. Answer what the flaw is and write better code.
 
 Hint: what if you had a thousand .csv files? How would you write this code?
 
+#### Answer
+
+Well done! And nice catch on the duplicate indices.
+
+{% highlight python %}
+# only works locally (doesn't work on the websites)
+folder = 'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz'
+dfs = [pd.read_csv(path) for path in folder.rglob(*.csv)]
+df = pd.concat(dfs, ignore_index=True)
+{% endhighlight %}
 
 ## Question 4
 
