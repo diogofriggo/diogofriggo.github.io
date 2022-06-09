@@ -38,7 +38,7 @@ from pathlib import Path
 
 import pandas as pd
 
-path = r'C:\__habits\blog\diogofriggo.github.io\data\2022-06-02-python-quizz\masts.csv'
+path = r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/masts.csv'
 df = pd.read_csv(path, index_col='stamp')
 df.index = pd.to_datetime(df.index, format='%Y-%m-%d %H:%M:%S')
 ...
