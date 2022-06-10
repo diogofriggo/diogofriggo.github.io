@@ -16,6 +16,87 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
 
+<!-- Test your regexes [here](https://regex101.com/).
+
+## Question 7
+
+Date/Time data come in a myriad of formats like
+* dd-mm-YYYY HH:MM:SS
+* dd/mm/YY HH:MM:SS
+* YYYY/mm/dd HH:MM
+* ... the list is long
+
+When reading tabular data with pandas this is addressed as shown on [Question 6](#question-6).
+
+Let's explore a different route here to learn a bit about **regular expressions**
+
+Regular expressions are a meta-language that matches generic aspects of text.
+
+For instance 2022-Jun-10 10:07:00 can be matched by the regex pattern: \d{4}-[A-Za-z]-\d{2} \d{2}:\d{2}:\d{2}
+
+Where \d represents a "digit", [A-Za-z] represents any upper or lower case letter between a-z
+
+Why is this stuff useful?
+
+Well, there are many tasks in programming that requires text validation, text replacement, text analysis.
+
+Regex shines in these tasks. For instance a bare bones e-mail validation regex could be represented as [A-Za-z0-9\.]@[A-Za-z0-9\.]
+
+Where \. means a "." character, we have to escape it with a backslash because it's a special regex character.
+
+#### Replacement
+
+Let's look at how Python enables replacing text with regular expressions
+
+{% highlight python %}
+import re
+names = ['Leonardo Barcelos', 'Ciro Bezerra', 'Antonio Bonow', 'Juliana Ko', 'Bernardo Letsch', 'Camila Mahon', 'Bernardo Piccoli']
+
+for name in names:
+    print(re.sub(r'(\w+) (\w+)', r'\2, \1', name))
+{% endhighlight %}
+
+Notice that I wrote (\w+) between parentheses, this means I can refer to this "group" later in the replacement string '\2, \1', everything within the first parenthesis can be referred to by \1 and the second by \2
+
+At this point I want to visit this [excellent website](https://regex101.com/) where you can test your regexes.
+Try this example there:
+
+![image-title-here](/assets/img/python-quiz-regex-101.png)
+
+#### Challenge
+
+We want to 'fix' the Date/Time information since we are not happy with 2018-02-01 00:00:00, we'd rather have 01/02/2018 00:00
+
+So this data...
+
+|stamp              |M0       |M1        |M2       |M3       |M4       |
+|-------------------|---------|----------|---------|---------|---------|
+|2018-02-01 00:00:00|6300.906 |6299.2573 |6300.5864|6301.967 |6299.5825|
+|2018-02-01 00:10:00|         |          |         |         |         |
+|2018-02-01 00:20:00|839.6042 |826.12946 |819.9327 |822.97186|838.7465 |
+|...                |...      |...       |...      |...      |...      |
+|2019-01-14 04:50:00|5840.9204|5822.8438 |5876.861 |5816.889 |         |
+|2019-01-14 05:00:00|         |          |         |         |         |
+|2019-01-14 05:10:00|3806.922 |3632.9902 |3773.146|3932.7952 |3593.6494|
+
+Becomes:
+
+|stamp           |M0       |M1        |M2       |M3       |M4       |
+|----------------|---------|----------|---------|---------|---------|
+|01/02/2018 00:00|6300.906 |6299.2573 |6300.5864|6301.967 |6299.5825|
+|01/02/2018 00:10|         |          |         |         |         |
+|01/02/2018 00:20|839.6042 |826.12946 |819.9327 |822.97186|838.7465 |
+|...             |...      |...       |...      |...      |...      |
+|14/01/2019 04:50|5840.9204|5822.8438 |5876.861 |5816.889 |         |
+|14/01/2019 05:00|         |          |         |         |         |
+|14/01/2019 05:10|3806.922 |3632.9902 |3773.146|3932.7952 |3593.6494|
+
+How would you do it?
+
+Now try without python. Use TextPad!
+
+![image-title-here](/assets/img/python-quiz-text-pad.png) -->
+
 ## Question 6
 
 We are frequently interested in computing monthly averages.
