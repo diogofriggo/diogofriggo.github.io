@@ -16,7 +16,7 @@ Feel free to look up on google / stackoverflow or run the code on your computer.
 
 You can also paste your python code on [this website](https://www.programiz.com/python-programming/online-compiler/) or [this **other** website](https://replit.com/languages/python3) and run it there to see the results.
 
-<!-- Test your regexes [here](https://regex101.com/).
+Test your regexes [here](https://regex101.com/).
 
 ## Question 7
 
@@ -95,7 +95,7 @@ How would you do it?
 
 Now try without python. Use TextPad!
 
-![image-title-here](/assets/img/python-quiz-text-pad.png) -->
+![image-title-here](/assets/img/python-quiz-text-pad.png)
 
 ## Question 6
 
@@ -146,6 +146,16 @@ The following result is expected
 |2018-11-30|3110.279586|3087.364842|3068.246916|2855.224892|2998.917573|
 |2018-12-31|3205.605510|3154.213606|3165.648948|2967.999845|3124.375335|
 |2019-01-31|3085.073091|3055.162951|3083.339377|2894.613425|2995.476110|
+
+#### Answer
+
+{% highlight python %}
+df.groupby(pd.Grouper(freq='M')).mean()
+{% endhighlight %}
+
+Notice that `df.resample` generally does the same thing but is slightly different in that it tries to fill gaps in the series.
+
+And it's is much slower than the `pd.Grouper` approach.
 
 ## Question 5
 
