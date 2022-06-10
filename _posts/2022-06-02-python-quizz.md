@@ -93,6 +93,8 @@ Becomes:
 
 How would you do it?
 
+The file can be downloaded from [here](https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/masts.csv)
+
 Now try without python. Use TextPad!
 
 ![image-title-here](/assets/img/python-quiz-text-pad.png)
