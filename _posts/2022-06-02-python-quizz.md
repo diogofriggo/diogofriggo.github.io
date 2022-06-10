@@ -32,17 +32,17 @@ Let's explore a different route here to learn a bit about **regular expressions*
 
 Regular expressions are a meta-language that matches generic aspects of text.
 
-For instance 2022-Jun-10 10:07:00 can be matched by the regex pattern: \d{4}-[A-Za-z]-\d{2} \d{2}:\d{2}:\d{2}
+For instance 2022-Jun-10 10:07:00 can be matched by the regex pattern: `\d{4}-[A-Za-z]-\d{2} \d{2}:\d{2}:\d{2}`
 
-Where \d represents a "digit", [A-Za-z] represents any upper or lower case letter between a-z
+Where `\d` represents a "digit", `[A-Za-z]` represents any upper or lower case letter between a-z
 
 Why is this stuff useful?
 
 Well, there are many tasks in programming that requires text validation, text replacement, text analysis.
 
-Regex shines in these tasks. For instance a bare bones e-mail validation regex could be represented as [A-Za-z0-9\.]@[A-Za-z0-9\.]
+Regex shines in these tasks. For instance a bare bones e-mail validation regex could be represented as `[A-Za-z0-9\.]@[A-Za-z0-9\.]`
 
-Where \. means a "." character, we have to escape it with a backslash because it's a special regex character.
+Where `\.` means a "." character, we have to escape it with a backslash because it's a special regex character.
 
 #### Replacement
 
@@ -56,7 +56,7 @@ for name in names:
     print(re.sub(r'(\w+) (\w+)', r'\2, \1', name))
 {% endhighlight %}
 
-Notice that I wrote (\w+) between parentheses, this means I can refer to this "group" later in the replacement string '\2, \1', everything within the first parenthesis can be referred to by \1 and the second by \2
+Notice that I wrote `(\w+)` between parentheses, this means I can refer to this "group" later in the replacement string `\2, \1`, everything within the first parenthesis can be referred to by `\1` and the second by `\2`
 
 At this point I want to visit this [excellent website](https://regex101.com/) where you can test your regexes.
 Try this example there:
@@ -65,7 +65,7 @@ Try this example there:
 
 #### Challenge
 
-We want to 'fix' the Date/Time information since we are not happy with 2018-02-01 00:00:00, we'd rather have 01/02/2018 00:00
+We want to fix the Date/Time information because we are not happy with 2018-02-01 00:00:00, we'd rather have 01/02/2018 00:00
 
 So this data...
 
