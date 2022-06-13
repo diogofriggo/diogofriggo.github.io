@@ -18,7 +18,7 @@ You can also paste your python code on [this website](https://www.programiz.com/
 
 Test your regexes [here](https://regex101.com/).
 
-<!-- ## Question 8
+## Question 8
 
 Today we're going to talk about a very powerful library for manipulating Microsoft Excel files.
 
@@ -73,7 +73,7 @@ Good luck!
 * You have to run this code on your local computer, it won't work online. Ask me for help if you can't run python code on your computer.
 * If you don't have xlwings installed, type `pip install xlwings` in a conda terminal
 
-Curious: what random age did you get? -->
+Curious: what random age did you get?
 
 ## Question 7
 
@@ -156,7 +156,7 @@ Now try without python. Use TextPad!
 
 ![image-title-here](/assets/img/python-quiz-text-pad.png)
 
-<!-- #### Answer
+#### Answer
 
 {% highlight python %}
 df['stamp'] = df['stamp'].replace(r'(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', r'\3/\2/\1 \5:\6', regex=True)
@@ -164,7 +164,7 @@ df['stamp'] = df['stamp'].replace(r'(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', r'\3/\
 
 In textpad the same thing can be accomplished as so:
 
-![image-title-here](/assets/img/python-quiz-text-pad-answer.png) -->
+![image-title-here](/assets/img/python-quiz-text-pad-answer.png)
 
 ## Question 6
 
