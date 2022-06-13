@@ -115,7 +115,7 @@ for name in names:
 
 Notice that I wrote `(\w+)` between parentheses, this means I can refer to this "group" later in the replacement string `\2, \1`, everything within the first parenthesis can be referred to by `\1` and the second by `\2`
 
-At this point I want to visit this [excellent website](https://regex101.com/) where you can test your regexes.
+At this point I want you to visit this [excellent website](https://regex101.com/) where you can test your regexes.
 Try this example there:
 
 ![image-title-here](/assets/img/python-quiz-regex-101.png)
@@ -155,6 +155,16 @@ The file can be downloaded from [here](https://raw.githubusercontent.com/diogofr
 Now try without python. Use TextPad!
 
 ![image-title-here](/assets/img/python-quiz-text-pad.png)
+
+<!-- #### Answer
+
+{% highlight python %}
+df['stamp'] = df['stamp'].replace(r'(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', r'\3/\2/\1 \5:\6', regex=True)
+{% endhighlight %}
+
+In textpad the same thing can be accomplished as so:
+
+![image-title-here](/assets/img/python-quiz-text-pad-answer.png) -->
 
 ## Question 6
 
