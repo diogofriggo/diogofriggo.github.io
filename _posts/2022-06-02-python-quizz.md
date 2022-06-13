@@ -18,6 +18,63 @@ You can also paste your python code on [this website](https://www.programiz.com/
 
 Test your regexes [here](https://regex101.com/).
 
+<!-- ## Question 8
+
+Today we're going to talk about a very powerful library for manipulating Microsoft Excel files.
+
+There are many such libraries for python, some just write, some read and write but don't support .xlsb files, and so on.
+
+Xlwings is best-of-breed here, it has the most support. To my knowledge it's the only one that can handle .xlsb files.
+
+Plus, their API is gorgeous and simple to use. You can even run VBA macros directly from python.
+
+Below I'll show you how to write a pandas dataframe into an Excel sheet
+
+{% highlight python %}
+from pathlib import Path
+
+from numpy.random import randint
+import pandas as pd
+import xlwings as xw
+
+people = [
+    'Leonardo Barcelos',
+    'Ciro Bezerra',
+    'Antonio Bonow',
+    'Juliana Ko',
+    'Bernardo Letsch',
+    'Camila Mahon',
+    'Bernardo Piccoli',
+]
+
+df = pd.DataFrame({
+    'name': people,
+    'random_age': [randint(5, 90) for _ in people],
+})
+
+book = xw.Book()
+sheet = book.sheets['Sheet1']
+sheet.range('A1').options(pd.DataFrame, index=False).value = df
+
+folder = Path(r'C:\python_quiz')
+path = folder / 'my_excel_file_written_with_xlwings.xlsx'
+book.save(path)
+{% endhighlight %}
+
+I want you to familiarize yourself with this library. To this end I want you to read back the dataframe I've written.
+
+That is, I want you to open the file `my_excel_file_written_with_xlwings.xlsx`, read the data from Sheet1 into a pandas DataFrame and print it.
+
+If you're stuck do some searching, xlwings has great documentation online, and stackoverflow is always your friend.
+
+Good luck!
+
+**IMPORTANT**:
+* You have to run this code on your local computer, it won't work online. Ask me for help if you can't run python code on your computer.
+* If you don't have xlwings installed, type `pip install xlwings` in a conda terminal
+
+Curious: what random age did you get? -->
+
 ## Question 7
 
 Date/Time data come in a myriad of formats like
