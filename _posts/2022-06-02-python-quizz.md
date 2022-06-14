@@ -18,7 +18,7 @@ You can also paste your python code on [this website](https://www.programiz.com/
 
 Test your regexes [here](https://regex101.com/).
 
-<!-- ## Question 9
+## Question 9
 
 Let's plot!
 
@@ -47,7 +47,7 @@ This is the result:
 
 ![image-title-here](/assets/img/python-quiz-plotly.png)
 
-Now your turn. I want you to plot the last 100 rows of all columns of `df`, without code duplication, on the same plot (one line for each column) -->
+Now your turn. I want you to plot the last 100 rows of all columns of `df`, without code duplication, on the same plot (one line for each column)
 
 ## Question 8
 
@@ -106,7 +106,7 @@ Good luck!
 
 Curious: what random age did you get?
 
-<!-- #### Answer
+#### Answer
 
 {% highlight python %}
 from pathlib import Path
@@ -120,7 +120,7 @@ book = xw.Book(path)
 sheet = book.sheets['Sheet1']
 df = sheet.range('A1').options(pd.DataFrame, expand='table', index=False).value
 print(df)
-{% endhighlight %} -->
+{% endhighlight %}
 
 ## Question 7
 
