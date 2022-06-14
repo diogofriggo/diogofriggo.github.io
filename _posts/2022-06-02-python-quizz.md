@@ -18,6 +18,37 @@ You can also paste your python code on [this website](https://www.programiz.com/
 
 Test your regexes [here](https://regex101.com/).
 
+<!-- ## Question 9
+
+Let's plot!
+
+We'll read some data using pandas and plot it with plotly.
+
+If you don't have plotly installed, open anaconda and type `pip install plotly`
+
+You'll need to run code from this example in your local computer - it doesn't work online.
+
+To save the file (write_image) you'll also need kaleido: `pip install kaleido`
+
+{% highlight python %}
+import pandas as pd
+import plotly.graph_objects as go
+
+path = r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/masts.csv'
+df = pd.read_csv(path)
+figure = go.Figure()
+trace = go.Scatter(x=df.index, y=df['M1'].iloc[:100])
+figure.add_trace(trace)
+figure.show()
+figure.write_image(r'C:\python_quiz\my_plot.png')
+{% endhighlight %}
+
+This is the result:
+
+![image-title-here](/assets/img/python-quiz-plotly.png)
+
+Now your turn. I want you to plot the last 100 rows of all columns of `df`, without code duplication, on the same plot (one line for each column) -->
+
 ## Question 8
 
 Today we're going to talk about a very powerful library for manipulating Microsoft Excel files.
@@ -75,6 +106,22 @@ Good luck!
 
 Curious: what random age did you get?
 
+<!-- #### Answer
+
+{% highlight python %}
+from pathlib import Path
+
+import pandas as pd
+import xlwings as xw
+
+folder = Path(r'C:\python_quiz')
+path = folder / 'my_excel_file_written_with_xlwings.xlsx'
+book = xw.Book(path)
+sheet = book.sheets['Sheet1']
+df = sheet.range('A1').options(pd.DataFrame, expand='table', index=False).value
+print(df)
+{% endhighlight %} -->
+
 ## Question 7
 
 Date/Time data come in a myriad of formats like
@@ -100,6 +147,12 @@ Well, there are many tasks in programming that requires text validation, text re
 Regex shines in these tasks. For instance a bare bones e-mail validation regex could be represented as `[A-Za-z0-9\.]@[A-Za-z0-9\.]`
 
 Where `\.` means a "." character, we have to escape it with a backslash because it's a special regex character.
+
+#### Answer
+
+{% highlight python %}
+df['stamp'] = df['stamp'].replace(r'(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', r'\3/\2/\1 \5:\6', regex=True)
+{% endhighlight %}
 
 #### Replacement
 
