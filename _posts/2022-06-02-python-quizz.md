@@ -18,6 +18,206 @@ You can also paste your python code on [this website](https://www.programiz.com/
 
 Test your regexes [here](https://regex101.com/).
 
+## Question 10
+
+Welcome to the final question!
+
+We are going to build an app that allows you to plot the columns of a file!
+
+The final result looks like this:
+
+![image-title-here](/assets/img/python-quiz-explore-timeseries.png)
+
+We start with a few imports.
+
+Make sure to install the same exact versions as me.
+
+We also initialize a new [dash](https://dash.gallery/Portal/) app.
+
+{% highlight python %}
+
+from pathlib import Path
+from functools import lru_cache
+import csv
+
+import pandas as pd
+from dash import Dash # pip install dash==1.16.2
+import dash_core_components as dcc # pip install dash-core-components==1.12.1
+import dash_html_components as html # pip install dash-html-components==1.1.1
+import dash_bootstrap_components as dbc # pip install dash-bootstrap-components==0.11.3
+from dash.dependencies import Input, Output
+from dash.exceptions import PreventUpdate
+import plotly.graph_objects as go # pip install plotly==4.11.0
+
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, '/assets/bootstrap.css'])
+{% endhighlight %}
+
+Next we define the user interface which has 4 rows.
+
+The first row holds one column with the file path.
+
+The second row holds one column with a multi-select dropdown that allows us to choose which columns to plot on the y-axis
+
+The third row holds three columns with a dropdown for choosing the x-axis column and two input fields that allows for plotting a subset of the rows of the file.
+
+The fourth row holds one column with the plot.
+
+{% highlight python %}
+
+app.layout = dbc.Container([
+    dbc.Row([
+        dbc.Col([
+            dbc.Label('File path', html_for='file_path'),
+            dbc.Input(id='file_path', persistence=True),
+        ], width=12),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            dbc.Label('Columns to plot', html_for='columns'),
+            dcc.Dropdown(id='columns', multi=True),
+        ], width=12),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            dbc.Label('X column (blank will default to df.index)', html_for='x_col'),
+            dcc.Dropdown(id='x_col', persistence=True),
+        ], width=4),
+        dbc.Col([
+            dbc.Label('Row start', html_for='row_start'),
+            dbc.Input(id='row_start', persistence=True),
+        ], width=1),
+        dbc.Col([
+            dbc.Label('Row end', html_for='row_end'),
+            dbc.Input(id='row_end', persistence=True),
+        ], width=1),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='output', style={'margin-top': '3px'})
+        ], width=12),
+    ]),
+], fluid=True)
+{% endhighlight %}
+
+We define a function to read the `file_path`
+
+Comment below on what you think the first two lines do.
+
+The `@lru_cache(maxsize=None)` attribute caches the function so that a second call to `read_csv` with the same `file_path` doesn't need to read the file again.
+
+{% highlight python %}
+@lru_cache(maxsize=None)
+def read_csv(file_path):
+    with open(file_path) as file:
+        sep = csv.Sniffer().sniff(file.readline()).delimiter
+
+    return pd.read_csv(file_path, sep=sep)
+{% endhighlight %}
+
+When a new `file_path` is provided we populate the x-axis columns dropdown with the columns found in the file
+
+{% highlight python %}
+@app.callback(Output('x_col', 'options'),
+              Input('file_path', 'value'))
+def x_col_options(file_path):
+    try:
+        if file_path is None:
+            raise PreventUpdate
+
+        file_path = Path(file_path)
+
+        if not file_path.exists():
+            raise PreventUpdate
+
+        df = read_csv(file_path)
+        options = [{'label': c, 'value': c} for c in df]
+        return options
+    except:
+        return []
+{% endhighlight %}
+
+When a new `file_path` is provided we also populate the y-axis columns dropdown with the columns found in the file
+
+{% highlight python %}
+@app.callback(Output('columns', 'options'),
+              Input('file_path', 'value'))
+def columns_options(file_path):
+    try:
+        if file_path is None:
+            raise PreventUpdate
+
+        file_path = Path(file_path)
+
+        if not file_path.exists():
+            raise PreventUpdate
+
+        df = read_csv(file_path)
+        options = [{'label': c, 'value': c} for c in df]
+        return options
+    except:
+        return []
+{% endhighlight %}
+
+Then we plot the data according to what's selected in the other fields:
+
+{% highlight python %}
+@app.callback(Output('output', 'figure'),
+              Input('file_path', 'value'),
+              Input('columns', 'value'),
+              Input('x_col', 'value'),
+              Input('row_start', 'value'),
+              Input('row_end', 'value'))
+def output_figure(file_path, columns, x_col, row_start, row_end):
+    if file_path is None:
+        raise PreventUpdate
+
+    file_path = Path(file_path)
+
+    if not file_path.exists():
+        raise PreventUpdate
+
+    if row_start is None:
+        row_start = 0
+
+    df = pd.read_csv(file_path)
+
+    if row_end is None:
+        row_end = len(df)
+
+    x = df.index
+    if x_col is not None:
+        x = df[x_col]
+
+    if columns is None or columns == []:
+        columns = df.columns
+
+    figure = go.Figure()
+    sub_df = df.iloc[int(row_start):int(row_end)]
+    for col in columns:
+        y = sub_df[col]
+        trace = go.Scatter(x=x, y=y, name=col)
+        figure.add_trace(trace)
+
+    return figure
+{% endhighlight %}
+
+Finally at the very end of the file we run the app
+
+{% highlight python %}
+if __name__ == '__main__':
+    app.run_server(debug=True)
+{% endhighlight %}
+
+Now I want you to copy all this code into a file and run it in a conda terminal with `python "C:\path\to\your\file.py"`
+
+Your second task is to improve this code. There's some intentionally duplicated code across this file.
+
+Think of a way to remove that duplication and rewrite this code.
+
+You can paste code in the comments with &lt;pre&gt;&lt;code class="python"&gt;**your code**&lt;/code&gt;&lt;/pre&gt;
+
+Thanks for joining me on this journey - I hope you've improved your programming skills and enjoyed doing it!
+
 ## Question 9
 
 Let's plot!
@@ -48,6 +248,27 @@ This is the result:
 ![image-title-here](/assets/img/python-quiz-plotly.png)
 
 Now your turn. I want you to plot the last 100 rows of all columns of `df`, without code duplication, on the same plot (one line for each column)
+
+#### Answer
+
+{% highlight python %}
+import pandas as pd
+import plotly.graph_objects as go
+
+path = r'https://raw.githubusercontent.com/diogofriggo/diogofriggo.github.io/main/data/2022-06-02-python-quizz/masts.csv'
+df = pd.read_csv(path, index_col='stamp')
+
+figure = go.Figure()
+
+sub_df = df.iloc[:100]
+x = sub_df.index
+for c in df:
+    y = sub_df[c]
+    trace = go.Scatter(x=x, y=y, name=c)
+    figure.add_trace(trace)
+
+figure.show()
+{% endhighlight %}
 
 ## Question 8
 
